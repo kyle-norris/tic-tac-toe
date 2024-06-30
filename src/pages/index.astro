@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <h1 class="mb-4">Tic Tac Toe</h1>
+    <div style="width: 100%; max-width: 300px;">
+      <ButtonLink href="/game" text="New Game"/>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  h1 {
+    font-size: 4rem;
+  }
+</style>

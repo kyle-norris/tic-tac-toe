@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Tile from "../components/Tile.astro";
+const tiles = [
+  "tile-0",
+  "tile-1",
+  "tile-2",
+  "tile-3",
+  "tile-4",
+  "tile-5",
+  "tile-6",
+  "tile-7",
+  "tile-8",
+];
+---
+
+<Layout title="Tic Tac Toe">
+  <main>
+    <h1>Game</h1>
+
+    <div class="d-flex">
+      <div class="game-board">
+        {tiles.map((item) => <Tile identifier={item} />)}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .game-board {
+    width: auto;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+</style>
