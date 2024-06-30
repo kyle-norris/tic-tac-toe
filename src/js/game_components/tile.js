@@ -1,13 +1,18 @@
 
 export class Tile {
-  constructor(id, onClick) {
+  constructor(id) {
     this.id = id;
-    this.setup(onClick);
   }
 
-  setup(callback) {
-    $(`#${this.id}`).on("click", function() {
-      callback();
-    })
+  setWinner() {
+    $(this.id).addClass("tile-winner");
+  }
+
+  setX() {
+    $(this.id).addClass("tile-x");
+  }
+
+  setO() {
+    $(this.id).addClass("tile-o");
   }
 }
