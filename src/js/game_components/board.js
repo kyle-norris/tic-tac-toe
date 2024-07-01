@@ -1,15 +1,6 @@
 import { Tile } from "./tile";
+import {getWinner, Computer} from "./brains";
 
-const WIN_SCENARIOS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
 
 export class Board {
   constructor() {
@@ -17,18 +8,16 @@ export class Board {
     this.tiles = [];
     this.currentPlayer = "x";
     this.userPlayer = "x";
+    this.computerPlayer = "o";
+    this.computer = new Computer(this.computerPlayer);
     this.gameOver = false;
+    this.difficulty = "hard";
     this.createTiles();
   }
 
   move(location, player) {
-    if (this.isValidMove(location)) {
-      this.state.splice(location, 1, player);
-      this.togglePlayer();
-    }
-
-    console.log(`Current state: ${this.state}`);
-    console.log(`Next player: ${this.currentPlayer}`);
+    this.state.splice(location, 1, player);
+    this.togglePlayer();
   }
 
   togglePlayer() {
@@ -39,34 +28,30 @@ export class Board {
     return this.state[location] !== "x" && this.state[location] !== "o";
   }
 
-  getWinner() {
-    var winner = [];
-    WIN_SCENARIOS.forEach((s) => {
-      if (
-        this.state[s[0]] == this.state[s[1]] &&
-        this.state[s[1]] == this.state[s[2]]
-      ) {
-        winner = s;
-      }
-    });
-    return winner;
+  computerTurn() {
+    var location = this.computer.getBestMove(this.state, this.difficulty);
+    console.log(`FINAL DECISION: ${location}`);
+    this.takeTurn(location, this.computerPlayer);
   }
 
-  onTileClick(location) {
+  takeTurn(location, player) {
     if (this.isValidMove(location) && !this.gameOver) {
-      if (this.currentPlayer == "x") {
+      if (player == "x") {
         this.tiles[location].setX();
       }
-      if (this.currentPlayer == "o") {
+      if (player == "o") {
         this.tiles[location].setO();
       }
-      this.move(location, this.currentPlayer);
+      this.move(location, player);
       this.checkForWinOrTie();
+      if (!this.gameOver && this.currentPlayer == this.computerPlayer) {
+        this.computerTurn();
+      }
     }
   }
 
   checkForWinOrTie() {
-    var winner = this.getWinner();
+    var winner = getWinner(this.state);
     if (winner.length > 0) {
       winner.forEach((i) => {
         this.tiles[i].setWinner();
@@ -87,7 +72,7 @@ export class Board {
       var id = this.getTileId(i);
       this.tiles.push(new Tile(id));
 
-      $(id).on("click", () => this.onTileClick(i));
+      $(id).on("click", () => this.takeTurn(i, this.userPlayer));
     });
   }
 
