@@ -103,7 +103,7 @@ export class Computer {
       resultMoves.push(move);
     })
 
-    console.log(`${resultMoves}: ${resultScores}`)
+    // console.log(`${resultMoves}: ${resultScores}`)
 
     if (difficulty == "hard") {
       var maxVal = Math.max(...resultScores);

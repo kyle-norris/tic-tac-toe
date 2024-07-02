@@ -4,73 +4,105 @@ interface Props {
 }
 
 const { identifier } = Astro.props;
+import Ximage from "@assets/X.svg";
+import Oimage from "@assets/O.svg"
 ---
 
 <div class="tile" id={identifier}>
-  <div class="x1"></div>
-  <div class="x2"></div>
-  <div class="o"></div>
+  <div class="front">
+    <div class="x-container">
+      <img src={Ximage.src} alt="X"/>
+    </div>
+    <div class="o-container">
+      <img src={Oimage.src} alt="O"/>
+    </div>
+  </div>
+  
 </div>
 
 <style lang="scss">
-  .tile {
-    height: 100px;
-    width: 100px;
-    background-color: white;
-    border-radius: 10px;
-    position: relative;
+
+  
+
+  .x-container, .o-container {
+    position: absolute;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    .x1,
-    .x2 {
-      position: absolute;
-      content: "";
-      height: 10px; /* cross thickness */
-      background-color: black;
-      opacity: 0;
-      transition: all 0.1s ease-in-out;
-    }
-
-    .x1 {
-      transform: rotate(45deg);
-    }
-
-    .x2 {
-      transform: rotate(-45deg);
-    }
-
-    .o {
-      height: 80%;
-      width: 80%;
-      border: solid black 10px;
-      border-radius: 50%;
-      opacity: 0;
-      transition: all 0.1s ease-in-out;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+    img {
+      width: 70%;
+      height: 70%;
     }
   }
 
+
+  .tile {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    background: hsl(193, 100%, 19%);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+
+    .front {
+      position: relative;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      font-size: 1.25rem;
+      background: hsl(193, 100%, 36%);
+      color: white;
+      transform: translateY(-6px);
+      will-change: transform;
+      transition: transform, background-color 0.2s ease-in-out;
+    }
+
+    &:hover {
+      .front {
+        transform: translateY(-7px);
+      }
+    } 
+
+    &:active .front {
+      transform: translateY(-2px);
+    }
+
+    
+
+    @media only screen and (min-width: 800px) {
+      height: 150px;
+      width: 150px;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      height: 200px;
+      width: 200px;
+    }
+
+  }
+
   .tile.tile-x {
-    .x1,
-    .x2 {
-      width: 100%;
+    .x-container {
       opacity: 1;
     }
   }
 
   .tile.tile-o {
-    .o {
+    .o-container {
       opacity: 1;
     }
   }
 
   .tile.tile-winner {
-    background-color: green;
+    .front {
+      background-color: hsl(193, 88%, 74%);
+    } 
   }
 </style>

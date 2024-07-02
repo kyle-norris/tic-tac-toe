@@ -1,6 +1,7 @@
 :root {
   --bs-body-bg: #13151a;
   --bs-heading-color: white;
+  --button-color: #9de0ff;
 }
 html {
   font-family: system-ui, sans-serif;
@@ -25,4 +26,81 @@ code {
 }
 a {
   text-decoration: none;
+}
+
+button {
+  outline: none;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+
+.settings-button {
+    background-color: var(--button-color);
+    height: auto;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 50%;
+
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+}
+
+
+.score-board {
+  width: auto;
+  // background-color: rgb(46, 46, 46);
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+
+  
+
+  .middle-section {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .score-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      text-align: center;
+    }
+
+    .score {
+      height: 80px;
+      width: 200px;
+      border: solid white 1px;
+      border-radius: 10px;
+      color: white;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+  }
+
+  @media only screen and (max-width: 768px) {
+    .middle-section {
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    .score-section {
+      .score {
+        width: 100%;
+      }
+      
+    }
+  }
 }

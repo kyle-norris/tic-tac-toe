@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Tile from "../components/Tile.astro";
+import IconGear from "src/components/icons/IconGear.astro";
 const tiles = [
   "tile-0",
   "tile-1",
@@ -16,9 +17,25 @@ const tiles = [
 
 <Layout title="Tic Tac Toe">
   <main>
-    <h1>Game</h1>
-
     <div class="d-flex">
+      <div class="score-board row no-gutters">
+        <div class="score-section col order-1">
+          <h2>Player</h2>
+          <div class="score player-score">52</div>
+        </div>
+        <div class="middle-section col-12 col-md order-4 order-md-2">
+          <button class="settings-button"><IconGear /></button>
+        </div>
+        <div class="score-section col order-3">
+          <h2>Computer</h2>
+          <div class="score computer-score">2</div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <div class="py-4">
       <div class="game-board">
         {tiles.map((item) => <Tile identifier={item} />)}
       </div>
@@ -27,6 +44,21 @@ const tiles = [
 </Layout>
 
 <style>
+  main {
+    min-height: 100%;
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+
+    @media only screen and (max-width: 768px) {
+      padding-top: 0;
+    }
+  }
+
+
   .game-board {
     width: auto;
     margin: auto;
@@ -35,5 +67,11 @@ const tiles = [
     grid-template-rows: 1fr 1fr 1fr;
     column-gap: 10px;
     row-gap: 10px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-right: 2rem;
   }
 </style>

@@ -30,8 +30,7 @@ export class Board {
 
   computerTurn() {
     var location = this.computer.getBestMove(this.state, this.difficulty);
-    console.log(`FINAL DECISION: ${location}`);
-    this.takeTurn(location, this.computerPlayer);
+    setTimeout(() => this.takeTurn(location, this.computerPlayer), 200);
   }
 
   takeTurn(location, player) {
