@@ -58,7 +58,6 @@ export class Computer {
   }
 
   minimax(gameState, depth, isMax) {
-    // console.log(`-------- Minimax: ${gameState}`)
     var score = getScore(gameState, this.player, this.opponent, depth);
     if (score != 0) {
       return score;
@@ -102,8 +101,6 @@ export class Computer {
       resultScores.push(moveVal);
       resultMoves.push(move);
     })
-
-    // console.log(`${resultMoves}: ${resultScores}`)
 
     if (difficulty == "hard") {
       var maxVal = Math.max(...resultScores);

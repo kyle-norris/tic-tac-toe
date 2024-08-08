@@ -1,7 +1,10 @@
 :root {
   --bs-body-bg: #13151a;
   --bs-heading-color: white;
-  --button-color: #9de0ff;
+  --button-color-secondary: #364247;
+  --button-color: #555e63;
+  --button-color-active: #386eca;
+  --button-color-active-secondary: #254d93;
 }
 html {
   font-family: system-ui, sans-serif;
@@ -102,5 +105,115 @@ button {
       }
       
     }
+  }
+}
+
+
+
+
+button.toggle-btn {
+  padding: 2rem 4rem;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+  background-color: var(--button-color-secondary);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  z-index: 500;
+  width: 100%;
+
+  div {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--button-color);
+    transform: translateY(-6px);
+    will-change: transform;
+    transition: transform, background-color 0.2s ease-in-out;
+  }
+
+  &.active {
+    background-color: var(--button-color-active-secondary);
+    transform: translateY(0px);
+    div {
+      background-color: var(--button-color-active);
+      transform: translateY(-4px);
+    }
+  }
+
+  &:hover:not(.active) {
+    div {
+      transform: translateY(-7px);
+    }
+  } 
+
+  &:active:not(.active) div {
+    transform: translateY(-2px);
+  }
+}
+
+
+button.styled {
+  padding: 2rem 6rem;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+  background-color: var(--button-color-active-secondary);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  z-index: 500;
+
+  div {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--button-color-active);
+    transform: translateY(-6px);
+    will-change: transform;
+    transition: transform, background-color 0.2s ease-in-out;
+  }
+
+  &.icon-circle {
+    padding: 2rem;
+    border-radius: 50%;
+
+    div {
+      border-radius: 50%;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &:hover {
+    div {
+      transform: translateY(-7px);
+    }
+  } 
+
+  &:active div {
+    transform: translateY(-2px);
   }
 }

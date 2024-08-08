@@ -1,27 +1,87 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ButtonLink from "../components/ButtonLink.astro";
+import Tile from "../components/Tile.astro";
+import IconGear from "../components/icons/IconGear.astro";
+import Settings from "../components/Settings.astro"
+import GameOver from "src/components/GameOver.astro";
+import IconArrowRepeat from "../components/icons/IconArrowRepeat.astro";
+const tiles = [
+  "tile-0",
+  "tile-1",
+  "tile-2",
+  "tile-3",
+  "tile-4",
+  "tile-5",
+  "tile-6",
+  "tile-7",
+  "tile-8",
+];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Tic Tac Toe">
   <main>
-    <h1 class="mb-4">Tic Tac Toe</h1>
-    <div style="width: 100%; max-width: 300px;">
-      <ButtonLink href="/game" text="New Game"/>
+    <div class="d-flex">
+      <div class="score-board row no-gutters">
+        <div class="score-section col order-1">
+          <h2>Player</h2>
+          <div class="score player-score" id="score-player">0</div>
+        </div>
+        <div class="middle-section col-12 col-md order-4 order-md-2">
+          <button class="styled icon-circle" data-bs-toggle="modal" data-bs-target="#settingsModal"><div><IconGear /></div></button>
+        </div>
+        <div class="score-section col order-3">
+          <h2>Computer</h2>
+          <div class="score computer-score" id="score-computer">0</div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="py-4">
+      <div class="game-board">
+        {tiles.map((item) => <Tile identifier={item} />)}
+      </div>
+    </div>
+
+    <div class="row" style="height: 100px;">
+      <div class="col-auto">
+        <button id="playAgainBtnCircle" class="styled icon-circle mx-auto" title="Play Again" style="display: none;"><div><IconArrowRepeat /></div></button>
+      </div>
     </div>
   </main>
+
+  <Settings />
+  <GameOver />
 </Layout>
 
 <style>
   main {
+    min-height: 100%;
+    padding-top: 0rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100%;
+    align-items: center;
+
+    @media only screen and (max-width: 768px) {
+      padding-top: 0;
+    }
   }
-  
+
+
+  .game-board {
+    width: auto;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+
   h1 {
-    font-size: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    margin-right: 2rem;
   }
 </style>

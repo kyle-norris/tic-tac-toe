@@ -15,4 +15,10 @@ export class Tile {
   setO() {
     $(this.id).addClass("tile-o");
   }
+
+  clear() {
+    $(this.id).removeClass("tile-o");
+    $(this.id).removeClass("tile-x");
+    $(this.id).removeClass("tile-winner");
+  }
 }
